@@ -29,11 +29,23 @@ function calcNumDaysNeeded (token, amount) {
 // }
 // const totalBalance = 1520.83334 + calcRate(11)
 
+function calculate () {
+  try {
+    $output.innerText = ''
+    const token = $token.value
+    const amount = Number($amountDeposited.value)
+
+    const days = calcNumDaysNeeded(token, amount)
+    $output.innerText = `${days.toFixed(2)} ${days === 1 ? 'day' : 'days'}`
+  } catch (err) {
+    console.error(err)
+    alert(err.message)
+  }
+}
+
 $form.addEventListener('submit', (event) => {
   event.preventDefault()
-  const token = $token.value
-  const amount = Number($amountDeposited.value)
-
-  const days = calcNumDaysNeeded(token, amount)
-  $output.innerText = `${days.toFixed(2)} ${days === 1 ? 'day' : 'days'}`
+  calculate()
 })
+
+calculate()
